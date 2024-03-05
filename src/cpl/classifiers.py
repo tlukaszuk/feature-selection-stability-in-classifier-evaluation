@@ -150,15 +150,17 @@ class CPLBaseClassifier(ABC):
         -------
         p : ndarray of shape (n_samples, n_classes)
             The class probabilities of the input samples. The order of the
-            classes corresponds to that in the attribute :term:`classes_`.
+            classes corresponds to that in the attribute classes_.
         """
         X = check_array(X)
         predictions_float = np.dot(X[:, self.hyperplane['features']], np.array(
             self.hyperplane['coefs'])) - self.hyperplane['theta']
-
         def sigmoid(x): return 1 / (1 + math.exp(-2*x))
         vfunc = np.vectorize(sigmoid)
-        return vfunc(predictions_float)
+        proba = np.zeros((X.shape[0], len(self.classes_)), dtype=np.float64)
+        proba[:,1] = vfunc(predictions_float)
+        proba[:,0] = 1.-proba[:,1]
+        return proba
 
 
     @abstractmethod
@@ -188,7 +190,11 @@ class CPLBaseClassifier(ABC):
         self.num, self.dim = X.shape
         self.dim += 1
 
-        self.fs = FeatureSpace(self.dim)
+        # determine feature weights
+        feature_weight = np.abs(X).max(axis=0)
+        feature_weight = np.append(feature_weight, [0.0])
+        self.fs = FeatureSpace(self.dim, feature_weight)
+
         self.fvs = FeatureVectors(X, y, sample_weight)
         self.uvs = UnitVectors(self.dim)
         self.bases = Bases(self.num, self.dim, self.fvs, self.uvs, self.fs)
@@ -260,10 +266,12 @@ class CPLBaseClassifier(ABC):
                 self.s -= self._get_cv_projection_correction_by_fv(v[1])
                 if self.fvs.products_fv_B1l[v[1]] > 0:
                     self._modify_cv_plus(v[1])
-                elif (self.s > 0) and (i < len(self.seq)):
+                elif (self.s > 0) and (i+1 < len(self.seq)):
                     self._modify_cv_minus(v[1])
             else:
                 self.s -= self._get_cv_projection_correction_by_uv(v[1])
+                if self.s <= 0:
+                    break
                 self._modify_cv_unit(v[1])
             if self.s <= 0:
                 break
@@ -377,14 +385,14 @@ class CPLBaseClassifier(ABC):
         if (kv_seq_id > 0) and EQUAL_EPSILON(self.kv[2] - self.seq[kv_seq_id-1][2]):
             i = kv_seq_id-1
             while (i >= 0) and EQUAL_EPSILON(self.kv[2] - self.seq[i][2]):
-                self.epsilon_neighbourhood.add((self.seq[i][0], self.seq[i][1]))
+                self.epsilon_neighbourhood.add(self.seq[i][:2])
                 i -= 1
 
         if (kv_seq_id < len(self.seq)-1) and (EQUAL_EPSILON(self.kv[2] - self.seq[kv_seq_id+1][2])):
             new_kv = self.seq[kv_seq_id]
             i = kv_seq_id+1
             while (i < len(self.seq)) and EQUAL_EPSILON(self.kv[2] - self.seq[i][2]):
-                self.epsilon_neighbourhood.add((new_kv[0], new_kv[1]))
+                self.epsilon_neighbourhood.add(new_kv[:2])
                 if new_kv[0]:
                     if self.fvs.products_fv_B1l[new_kv[1]] <= 0:
                         self._modify_cv_minus(new_kv[1])
@@ -501,48 +509,56 @@ class CPLBaseClassifier(ABC):
             self.procedure_state = ProcedureState.NORMAL_STATE
 
 
-    def _func_crit(self):
-        # i = 0
-        # for fv,ps,sw in zip(self.fvs.vectors, self.fvs.on_positive_side, self.fvs.sample_weight):
-        #     if ps:
-        #         print(
-        #             i,
-        #             sw,
-        #             sw*(1.-np.dot(fv[self.fs.features], self.vertex[self.fs.features])),
-        #             1.-np.dot(fv[self.fs.features], self.vertex[self.fs.features]),
-        #             np.dot(fv[self.fs.features], self.vertex[self.fs.features])
-        #         )
-        #     i+=1
-        cr1 = sum([sw*(1.-np.dot(fv[self.fs.features], self.vertex[self.fs.features]))
+    def _func_crit(self, vertex):
+        cr1 = sum([sw*(1.-np.dot(fv[self.fs.features], vertex[self.fs.features]))
                    for fv, ps, sw in zip(self.fvs.vectors, self.fvs.on_positive_side, self.fvs.sample_weight) if ps])
-        cr2 = self.p_lambda * sum([abs(self.vertex[f])*self.fs.feature_weight[f]
+        cr2 = self.p_lambda * sum([abs(vertex[f])*self.fs.feature_weight[f]
                                   for f in self.fs.features if self.uvs.in_base[f] == False])
         return cr1, cr2, cr1 + cr2
 
 
-    def _margin_width(self):
-        return 1 / sum([abs(self.vertex[f])*self.fs.feature_weight[f] for f in self.fs.features if self.uvs.in_base[f] == False])
+    def _margin_width(self, vertex):
+        return 1 / sum([abs(vertex[f])*self.fs.feature_weight[f] for f in self.fs.features if self.uvs.in_base[f] == False])
+    
+
+    def _correction_vector(self):
+        if self._optimization_mode == OptimizationMode.OPT_HYP_MODE:
+            cv = -self.p_lambda * self.uvs.ev[self.fs.features] * self.fs.feature_weight[self.fs.features]
+        else:
+            cv = [0 for f in self.fs.features]
+        cv += (self.fvs.vectors[self.fvs.on_positive_side][:,self.fs.features] * np.array([self.fvs.sample_weight[self.fvs.on_positive_side]]).T).sum(axis=0)
+        return cv
 
 
     def _diagnose(self):
+        vertex = self.bases.get_current_vertex()
+        important_features = [f for f in self.fs.features if not self.uvs.in_base[f]]
         print("--------------")
-        print("Fc = ", self._func_crit())
-        print("Margin = ", self._margin_width())
+        print("Fc = ", self._func_crit(vertex))
+        print("Margin = ", self._margin_width(vertex))
+        print("procedure state = ", self.procedure_state)
+        # if self.procedure_state == ProcedureState.DEGENERATION_STATE:
+        #     print()
+        #     print(self.epsilon_neighbourhood)
         print()
         print("l={}, lv={}, kv={}".format(self.l, self.lv, self.kv))
         # print()
         # print("seq: ", self.seq)
-        # print()
+        print()
         self.bases.diagnose()
-        # print()
-        # print("cv: ", self.cv[self.fs.features])
+        print()
+        print("cv(proc): ", self.cv[self.fs.features])
+        print("cv(spr_): ", self._correction_vector())
         # print()
         # print("B1 x cv: ", self.products_B1_cv[self.fs.features])
         print()
-        print("vertex: ", [(f,v) for f,v in zip(self.fs.features, self.vertex[self.fs.features]) if not EQUAL_ZERO(v)])
+        print("vertex: ", [(f,v) for f,v in zip(self.fs.features, vertex[self.fs.features]) if f in important_features])
+        # print("feature weight: ", self.fs.feature_weight[self.fs.features])
         # print()
-        # for fv,ps in zip(self.fvs.vectors, self.fvs.on_positive_side):
-        #     print(ps, np.dot(fv[self.fs.features],self.vertex[self.fs.features])+1e-10<1, np.dot(fv[self.fs.features],self.vertex[self.fs.features]))
+        # print("# proc_ps man_ps man_pyv error")
+        # for i,(fv,ps) in enumerate(zip(self.fvs.vectors, self.fvs.on_positive_side)):
+        #     pyv = np.dot(fv[self.fs.features],vertex[self.fs.features])
+        #     print(i, ps, pyv+1e-10 < 1, pyv, "<---" if ps != (pyv+1e-10 < 1) else "")
         print("--------------")
 
 
@@ -631,9 +647,6 @@ class GenetClassifier(CPLBaseClassifier):
         returns - index of the feature or None
         """
         fos = self.fs.features_outside_space
-        if len(fos) == 0:
-            return None
-
         wc = (self.fvs.vectors[self.fvs.on_positive_side][:,fos] * np.array([self.fvs.sample_weight[self.fvs.on_positive_side]]).T).sum(axis=0)
 
         ffvb = self.fs.features[self.bases.B_type[self.fs.features]]
@@ -645,24 +658,7 @@ class GenetClassifier(CPLBaseClassifier):
         correvtion_mask = (wc < 0)
         wc[correvtion_mask] = -wc[correvtion_mask] - 2 * self.p_lambda * self.fs.feature_weight[fos[correvtion_mask]]
 
-        # fos = self.fs.features_outside_space
-        # wc = []
-        # for f in fos:
-        #     wc_ = 0
-        #     for fv,pos,sw in zip(self.fvs.vectors, self.fvs.on_positive_side, self.fvs.sample_weight):
-        #         if pos:
-        #             wc_ += sw * fv[f]
-        #     for f1 in self.fs.features:
-        #         if self.bases.B_type[f1]:
-        #             wc_ -= self.products_B1_cv[f1] * self.fvs.vectors[self.bases.B_index[f1]][f]
-        #     if self._optimization_mode == OptimizationMode.OPT_HYP_MODE:
-        #         wc_ -= self.p_lambda * self.uvs.ev[f] * self.fs.feature_weight[f]
-        #     if wc_ < 0:
-        #         wc_ = -wc_ - 2 * self.p_lambda * self.fs.feature_weight[f]
-        #     wc.append(wc_)
-        # wc = np.array(wc)
-
-        if np.max(wc) < ZERO:
+        if (len(wc) == 0) or (np.max(wc) < ZERO):
             return None
         else:
             return fos[wc.argmax()]
