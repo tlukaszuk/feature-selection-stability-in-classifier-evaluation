@@ -1,34 +1,34 @@
 classifier,dataset,cv-procedure,p,Lustgarten,Nogueira,#features_mean,#features_min,#features_max,acc_train,acc_test,execution_time
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,1)",1,0.4643,0.4315,28.0667,18,35,0.9907,0.6347,0.2639
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,2)",2,0.3438,0.3173,27.4,21,37,0.992,0.6472,0.2607
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,3)",3,0.3152,0.2934,25.5667,17,34,0.9927,0.6653,0.2602
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,4)",4,0.2765,0.2551,26.2,18,34,0.992,0.6625,0.2605
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,5)",5,0.2356,0.2201,25.2667,16,34,0.9907,0.6917,0.2592
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,6)",6,0.2102,0.1893,26.5,18,42,0.9897,0.6625,0.2631
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,7)",7,0.2361,0.2105,25.5333,15,38,0.9907,0.6958,0.268
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,8)",8,0.2458,0.2174,26.1333,15,42,0.988,0.6944,0.2693
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,9)",9,0.2226,0.1972,27.1333,15,36,0.9897,0.6889,0.2714
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,10)",10,0.2031,0.1791,24.6,9,43,0.9907,0.6917,0.2717
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,12)",12,0.1971,0.1773,24.5926,16,37,0.9915,0.6728,0.2651
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,14)",14,0.2175,0.1864,25.7917,16,48,0.99,0.6979,0.2673
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,16)",16,0.1457,0.1273,25.1905,13,38,0.9919,0.6944,0.2662
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,18)",18,0.1456,0.1172,25.8333,15,43,0.9928,0.6898,0.2677
-"RandomForest (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,20)",20,0.1677,0.1365,25.1667,12,39,0.9878,0.6944,0.2638
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,1)",1,0.9204,0.8687,23.9,19,31,0.824,0.6347,0.1419
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,2)",2,0.8627,0.8075,26.1333,20,33,0.8293,0.6319,0.1355
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,3)",3,0.8348,0.7836,25.0667,20,35,0.8287,0.6708,0.1411
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,4)",4,0.8139,0.7771,27.0667,22,34,0.831,0.6639,0.134
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,5)",5,0.7756,0.7182,24.7667,19,35,0.8337,0.6875,0.1417
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,6)",6,0.7252,0.682,27.6,22,38,0.828,0.6944,0.1384
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,7)",7,0.7216,0.6716,25.5667,18,36,0.8243,0.6861,0.1437
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,8)",8,0.7233,0.6719,28.1,21,37,0.8213,0.7167,0.1346
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,9)",9,0.6412,0.5995,25.5667,20,30,0.826,0.6986,0.1437
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,10)",10,0.6644,0.6127,27.6667,20,36,0.8197,0.7111,0.1373
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,12)",12,0.6061,0.5602,26.4444,21,33,0.8293,0.6775,0.1396
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,14)",14,0.5691,0.5098,27.3333,18,36,0.8275,0.7153,0.1392
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,16)",16,0.572,0.5068,26.3333,18,33,0.8152,0.7183,0.1412
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,18)",18,0.5219,0.4807,26.6111,21,32,0.8172,0.7245,0.1412
-"LogisticRegression (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,20)",20,0.4974,0.4613,27.1111,21,34,0.825,0.6991,0.1366
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,1)",1,0.4643,0.4315,28.0667,18,35,0.9907,0.6347,0.2639
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,2)",2,0.3438,0.3173,27.4,21,37,0.992,0.6472,0.2607
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,3)",3,0.3152,0.2934,25.5667,17,34,0.9927,0.6653,0.2602
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,4)",4,0.2765,0.2551,26.2,18,34,0.992,0.6625,0.2605
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,5)",5,0.2356,0.2201,25.2667,16,34,0.9907,0.6917,0.2592
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,6)",6,0.2102,0.1893,26.5,18,42,0.9897,0.6625,0.2631
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,7)",7,0.2361,0.2105,25.5333,15,38,0.9907,0.6958,0.268
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,8)",8,0.2458,0.2174,26.1333,15,42,0.988,0.6944,0.2693
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,9)",9,0.2226,0.1972,27.1333,15,36,0.9897,0.6889,0.2714
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,10)",10,0.2031,0.1791,24.6,9,43,0.9907,0.6917,0.2717
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,12)",12,0.1971,0.1773,24.5926,16,37,0.9915,0.6728,0.2651
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,14)",14,0.2175,0.1864,25.7917,16,48,0.99,0.6979,0.2673
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,16)",16,0.1457,0.1273,25.1905,13,38,0.9919,0.6944,0.2662
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,18)",18,0.1456,0.1172,25.8333,15,43,0.9928,0.6898,0.2677
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Prostate,"trains-p-diff(100,20)",20,0.1677,0.1365,25.1667,12,39,0.9878,0.6944,0.2638
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,1)",1,0.9204,0.8687,23.9,19,31,0.824,0.6347,0.1419
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,2)",2,0.8627,0.8075,26.1333,20,33,0.8293,0.6319,0.1355
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,3)",3,0.8348,0.7836,25.0667,20,35,0.8287,0.6708,0.1411
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,4)",4,0.8139,0.7771,27.0667,22,34,0.831,0.6639,0.134
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,5)",5,0.7756,0.7182,24.7667,19,35,0.8337,0.6875,0.1417
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,6)",6,0.7252,0.682,27.6,22,38,0.828,0.6944,0.1384
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,7)",7,0.7216,0.6716,25.5667,18,36,0.8243,0.6861,0.1437
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,8)",8,0.7233,0.6719,28.1,21,37,0.8213,0.7167,0.1346
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,9)",9,0.6412,0.5995,25.5667,20,30,0.826,0.6986,0.1437
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,10)",10,0.6644,0.6127,27.6667,20,36,0.8197,0.7111,0.1373
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,12)",12,0.6061,0.5602,26.4444,21,33,0.8293,0.6775,0.1396
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,14)",14,0.5691,0.5098,27.3333,18,36,0.8275,0.7153,0.1392
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,16)",16,0.572,0.5068,26.3333,18,33,0.8152,0.7183,0.1412
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,18)",18,0.5219,0.4807,26.6111,21,32,0.8172,0.7245,0.1412
+"LR (LogisticRegression(C=0.33, max_iter=100000, penalty='l1', solver='liblinear'))",Prostate,"trains-p-diff(100,20)",20,0.4974,0.4613,27.1111,21,34,0.825,0.6991,0.1366
 "SVM (LinearSVC(C=0.09, dual=False, max_iter=100000, penalty='l1'))",Prostate,"trains-p-diff(100,1)",1,0.889,0.8552,24.3667,17,30,0.834,0.6389,0.1673
 "SVM (LinearSVC(C=0.09, dual=False, max_iter=100000, penalty='l1'))",Prostate,"trains-p-diff(100,2)",2,0.8459,0.8059,24.1,17,34,0.8377,0.6417,0.1604
 "SVM (LinearSVC(C=0.09, dual=False, max_iter=100000, penalty='l1'))",Prostate,"trains-p-diff(100,3)",3,0.7925,0.7611,25.8,19,34,0.835,0.6708,0.1555
