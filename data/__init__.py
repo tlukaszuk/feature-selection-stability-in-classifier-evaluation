@@ -6,6 +6,9 @@ class Datasets():
    
     datasets = {
         "Breast": "Breast_GSE70947.zip",
+        "Colorectal": "Colorectal_GSE44076.zip",
+        "Leukemia": "Leukemia_GSE63270.zip",
+        "Liver": "Liver_GSE76427.zip",
         "Prostate": "Prostate_GSE6919_U95B.zip",
         "Renal": "Renal_GSE53757.zip",
         "Throat": "Throat_GSE42743.zip",
@@ -24,7 +27,7 @@ class Datasets():
 
 if __name__ == "__main__":
     
-    for name in ['Breast', 'Prostate', 'Renal', 'Throat']:
+    for name in ["Breast", "Colorectal", "Leukemia", "Liver", "Prostate", "Renal", "Throat"]:
         ds = Datasets.get(name)
         print("---------------------")
         print(name)

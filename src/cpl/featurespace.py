@@ -3,12 +3,15 @@ import numpy as np
 
 class FeatureSpace:
     
-    def __init__(self, dim):
+    def __init__(self, dim, feature_weight=None):
         self.__universum = np.arange(dim)
         self.__features = np.zeros(0, dtype=int)
         self.__feature_state = np.full((dim), False)
-        self.__feature_weight = np.full((dim), 1.0)
-        self.__feature_weight[-1] = 0
+        if feature_weight is None:
+            self.__feature_weight = np.full((dim), 1.0)
+            self.__feature_weight[-1] = 0
+        else:
+            self.__feature_weight = np.array(feature_weight)
 
 
     @property

@@ -10,7 +10,7 @@ from src.utils.stability_measure import StabilityMeasure
 from src.utils.progress_bar import printProgressBar
 
 
-def experiment(classifiers:list, datasets:list, ps:list, max_cv_steps=30, random_states = [42, 16, 101], verbose=False):
+def experiment(classifiers:list, datasets:list, ps:list, max_cv_steps=30, random_states = [42, 16, 101], verbose=False, buffer=False):
 
     results_df = pd.DataFrame(columns=[
         "classifier",
@@ -19,6 +19,7 @@ def experiment(classifiers:list, datasets:list, ps:list, max_cv_steps=30, random
         "p",
         "Lustgarten",
         "Nogueira",
+        "Jaccard",
         "#features_mean",
         "#features_min",
         "#features_max",
@@ -51,6 +52,7 @@ def experiment(classifiers:list, datasets:list, ps:list, max_cv_steps=30, random
 
                 lustgarten_values = []
                 nogueira_values = []
+                jaccard_values = []
                 selected_features_counts = []
                 train_accs = []
                 test_accs = []
@@ -88,6 +90,7 @@ def experiment(classifiers:list, datasets:list, ps:list, max_cv_steps=30, random
                     selected_features_counts += [len(fs) for fs in selected_features_sets]
                     lustgarten_values.append(StabilityMeasure.Lustgarten(selected_features_sets, n_features))
                     nogueira_values.append(StabilityMeasure.Nogueira(selected_features_sets, n_features))
+                    jaccard_values.append(StabilityMeasure.JaccardIndex(selected_features_sets, n_features))
 
                 new_row = pd.DataFrame({
                     "classifier": f"{classifier['name']} ({classifier['estimator']})",
@@ -96,6 +99,7 @@ def experiment(classifiers:list, datasets:list, ps:list, max_cv_steps=30, random
                     "p": p,
                     "Lustgarten": round(sum(lustgarten_values)/len(lustgarten_values), 4),
                     "Nogueira": round(sum(nogueira_values)/len(nogueira_values), 4),
+                    "Jaccard": round(sum(jaccard_values)/len(jaccard_values), 4),
                     "#features_mean": round(sum(selected_features_counts)/len(selected_features_counts), 4),
                     "#features_min": min(selected_features_counts),
                     "#features_max": max(selected_features_counts),
@@ -107,5 +111,7 @@ def experiment(classifiers:list, datasets:list, ps:list, max_cv_steps=30, random
                 if verbose:
                     print(new_row.values[0,4:])
                 results_df = pd.concat([results_df, new_row], ignore_index=True)
+                if buffer:
+                    results_df.to_csv("results_buffer.csv", index=False)
 
     return results_df

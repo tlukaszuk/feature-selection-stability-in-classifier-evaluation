@@ -1,61 +1,61 @@
-classifier,dataset,cv-procedure,p,Lustgarten,Nogueira,#features_mean,#features_min,#features_max,acc_train,acc_test,execution_time
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,1)",1,0.4659,0.4347,23.0667,8,39,0.9856,0.8609,0.6391
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,2)",2,0.3247,0.2853,25.4,11,49,0.9844,0.8493,0.6592
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,3)",3,0.2994,0.2715,28.6,14,50,0.9842,0.8522,0.6441
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,4)",4,0.2573,0.2219,27.5667,10,54,0.9856,0.8493,0.6172
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,5)",5,0.2163,0.1887,27.9333,13,50,0.9808,0.8362,0.6648
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,6)",6,0.2201,0.1899,27.9667,13,62,0.9806,0.8275,0.6465
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,7)",7,0.2257,0.1849,29.0333,10,56,0.9797,0.8261,0.6367
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,8)",8,0.2025,0.182,29.5333,14,47,0.9831,0.8232,0.5936
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,9)",9,0.2121,0.167,25.8667,9,50,0.9839,0.8406,0.5939
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,10)",10,0.2101,0.1735,27.6667,14,62,0.9808,0.8348,0.5932
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,12)",12,0.1765,0.1479,24.7,15,40,0.985,0.8536,0.5948
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,14)",14,0.1687,0.1359,24.3704,14,46,0.9815,0.8599,0.5942
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,16)",16,0.1551,0.1267,27.0833,10,53,0.9812,0.8533,0.6633
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,18)",18,0.1613,0.1328,22.381,12,32,0.9798,0.8654,0.6376
-"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,20)",20,0.1836,0.1385,25.1905,12,56,0.9786,0.8571,0.6017
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,1)",1,0.9411,0.8717,24.8333,17,33,0.8681,0.8768,0.633
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,2)",2,0.8834,0.8229,25.5667,17,33,0.8697,0.871,0.6266
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,3)",3,0.8482,0.7896,25.2,16,33,0.8689,0.8609,0.6178
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,4)",4,0.8454,0.778,25.1,15,34,0.8697,0.8739,0.6752
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,5)",5,0.7746,0.7148,24.5,15,33,0.8714,0.8522,0.7625
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,6)",6,0.7557,0.6808,23.9,15,34,0.8706,0.8536,0.6993
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,7)",7,0.7667,0.7005,25.4,16,34,0.8714,0.8478,0.6113
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,8)",8,0.7517,0.7004,24.4333,17,36,0.8736,0.8449,0.6034
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,9)",9,0.7032,0.6327,23.5333,14,30,0.8711,0.8536,0.6498
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,10)",10,0.6936,0.631,23.5667,15,30,0.8711,0.8507,0.6606
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,12)",12,0.6397,0.5929,24.3333,17,29,0.8678,0.8638,0.62
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,14)",14,0.5794,0.5309,22.0,15,29,0.8682,0.8647,0.6205
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,16)",16,0.5617,0.5196,23.375,16,30,0.8722,0.8551,0.6579
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,18)",18,0.5005,0.4619,22.2857,19,28,0.8683,0.8696,0.6847
-"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,20)",20,0.5258,0.4713,22.0476,13,29,0.8671,0.8778,0.6806
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,1)",1,0.871,0.8448,26.4,19,33,0.8886,0.8928,0.9422
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,2)",2,0.8046,0.7569,26.3667,18,34,0.8894,0.8797,0.6943
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,3)",3,0.7757,0.7304,27.0,20,33,0.8906,0.8768,0.7694
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,4)",4,0.7779,0.7361,26.8333,18,34,0.8914,0.8783,0.7529
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,5)",5,0.721,0.6872,27.9333,21,36,0.8883,0.8594,0.7842
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,6)",6,0.6931,0.6498,27.1333,21,40,0.8903,0.8594,0.7605
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,7)",7,0.6862,0.6357,27.3,19,35,0.8942,0.8522,0.7162
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,8)",8,0.6499,0.6172,28.5333,22,34,0.8933,0.8507,0.7509
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,9)",9,0.6044,0.5766,26.9,22,33,0.8925,0.858,0.6973
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,10)",10,0.6102,0.5803,27.6,23,34,0.8931,0.8507,0.7961
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,12)",12,0.5658,0.534,26.3667,21,34,0.8939,0.8725,0.7054
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,14)",14,0.5363,0.501,25.1111,20,33,0.8935,0.8696,0.7098
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,16)",16,0.5164,0.4916,26.0,22,31,0.8941,0.8605,0.729
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,18)",18,0.494,0.4715,26.8571,23,32,0.8901,0.8737,0.7122
-"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,20)",20,0.4801,0.4445,27.5238,21,32,0.8905,0.8799,0.6908
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,1)",1,0.8827,0.8536,26.5333,20,32,0.8678,0.8928,6.8294
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,2)",2,0.809,0.7807,26.9667,20,32,0.87,0.8812,6.5478
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,3)",3,0.7455,0.7102,26.7333,21,32,0.8711,0.8783,6.541
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,4)",4,0.7135,0.6828,26.5,18,32,0.87,0.8768,6.8193
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,5)",5,0.6938,0.6573,26.4333,21,32,0.8725,0.8594,6.6139
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,6)",6,0.6365,0.6094,25.7667,20,31,0.8722,0.8594,6.3441
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,7)",7,0.6526,0.614,26.3333,21,33,0.8733,0.8536,6.4144
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,8)",8,0.6398,0.6178,27.1,20,31,0.8739,0.8536,6.3597
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,9)",9,0.5641,0.536,26.2333,22,31,0.8725,0.8609,6.5397
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,10)",10,0.5635,0.53,26.3333,18,32,0.8728,0.8565,6.61
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,12)",12,0.5391,0.5067,26.2,20,33,0.8714,0.8725,6.2203
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,14)",14,0.5085,0.4745,26.3333,18,31,0.8707,0.8712,6.7117
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,16)",16,0.5204,0.4772,25.7917,15,33,0.8743,0.8587,6.2389
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,18)",18,0.4428,0.4198,26.3333,20,31,0.8706,0.8737,6.4985
-CPL (GenetClassifier(C=0.88)),Renal,"trains-p-diff(120,20)",20,0.4898,0.4579,26.0,21,33,0.8698,0.8758,6.6154
+classifier,dataset,cv-procedure,p,Lustgarten,Nogueira,Jaccard,#features_mean,#features_min,#features_max,acc_train,acc_test,execution_time
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,1)",1,0.4659,0.4347,0.3041,23.0667,8,39,0.9856,0.8609,0.8189
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,2)",2,0.3247,0.2853,0.1773,25.4,11,49,0.9844,0.8493,0.7968
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,3)",3,0.2994,0.2715,0.1623,28.6,14,50,0.9842,0.8522,0.797
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,4)",4,0.2573,0.2219,0.1272,27.5667,10,54,0.9856,0.8493,0.7987
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,5)",5,0.2163,0.1887,0.1061,27.9333,13,50,0.9808,0.8362,0.7978
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,6)",6,0.2201,0.1899,0.1083,27.9667,13,62,0.9806,0.8275,0.7906
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,7)",7,0.2257,0.1849,0.1054,29.0333,10,56,0.9797,0.8261,0.793
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,8)",8,0.2025,0.182,0.1026,29.5333,14,47,0.9831,0.8232,0.7916
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,9)",9,0.2121,0.167,0.0932,25.8667,9,50,0.9839,0.8406,0.8231
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,10)",10,0.2101,0.1735,0.0977,27.6667,14,62,0.9808,0.8348,0.7977
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,12)",12,0.1765,0.1479,0.0809,24.7,15,40,0.985,0.8536,0.8033
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,14)",14,0.1687,0.1359,0.0738,24.3704,14,46,0.9815,0.8599,0.8073
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,16)",16,0.1551,0.1267,0.0647,27.0833,10,53,0.9812,0.8533,0.7984
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,18)",18,0.1613,0.1328,0.0723,22.381,12,32,0.9798,0.8654,0.807
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Renal,"trains-p-diff(120,20)",20,0.1836,0.1385,0.0735,25.1905,12,56,0.9786,0.8571,0.8199
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,1)",1,0.9102,0.8732,0.7802,26.0667,18,33,0.8681,0.8768,0.7296
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,2)",2,0.8733,0.8307,0.7181,25.6,18,33,0.8697,0.871,0.7154
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,3)",3,0.843,0.7774,0.6408,24.3333,17,33,0.8692,0.8623,0.6196
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,4)",4,0.8329,0.7589,0.6211,25.0667,16,33,0.8697,0.8739,0.6163
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,5)",5,0.7898,0.7337,0.5849,25.2,19,34,0.8714,0.8522,0.6129
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,6)",6,0.7606,0.6955,0.54,24.5667,13,35,0.8706,0.8536,0.6146
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,7)",7,0.7486,0.7065,0.5547,25.8,16,34,0.8714,0.8478,0.6048
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,8)",8,0.7439,0.6759,0.5124,23.6333,14,34,0.8736,0.8449,0.6173
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,9)",9,0.7089,0.6336,0.4669,23.6,14,30,0.8711,0.8536,0.6069
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,10)",10,0.683,0.624,0.4596,23.4,14,31,0.8711,0.8507,0.6073
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,12)",12,0.6459,0.588,0.4191,23.7667,15,29,0.8678,0.8652,0.6053
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,14)",14,0.5847,0.538,0.375,22.963,14,28,0.8682,0.8647,0.6051
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,16)",16,0.5564,0.4959,0.3364,23.125,14,30,0.8722,0.8551,0.609
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,18)",18,0.5176,0.4713,0.3112,23.9048,15,32,0.8683,0.8696,0.6103
+"LR (LogisticRegression(C=0.097, max_iter=100000, penalty='l1', solver='liblinear'))",Renal,"trains-p-diff(120,20)",20,0.5077,0.4535,0.2983,22.8095,14,32,0.8671,0.8778,0.6144
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,1)",1,0.8723,0.8422,0.7394,26.1333,19,34,0.8886,0.8928,0.6305
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,2)",2,0.7957,0.7515,0.6162,26.3667,18,34,0.8894,0.8797,0.6531
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,3)",3,0.7765,0.7275,0.584,27.1333,20,33,0.8906,0.8768,0.6687
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,4)",4,0.7771,0.7377,0.596,27.0,18,34,0.8914,0.8783,0.6804
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,5)",5,0.7205,0.686,0.5324,28.0,21,36,0.8883,0.8594,0.6665
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,6)",6,0.6943,0.6506,0.4911,27.0667,21,40,0.8903,0.8594,0.7119
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,7)",7,0.6845,0.6358,0.4745,27.2667,19,35,0.8942,0.8522,0.6212
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,8)",8,0.6546,0.6198,0.4553,28.6,22,34,0.8933,0.8507,0.6437
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,9)",9,0.6088,0.5817,0.4167,27.0,22,32,0.8928,0.858,0.7062
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,10)",10,0.6062,0.5773,0.4144,27.5,23,32,0.8931,0.8507,0.6321
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,12)",12,0.5619,0.532,0.3692,26.2333,20,34,0.8939,0.8725,0.6831
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,14)",14,0.537,0.503,0.3453,25.1111,20,32,0.8935,0.8696,0.7086
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,16)",16,0.5173,0.4917,0.3327,25.9167,22,31,0.8941,0.8605,0.6948
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,18)",18,0.4971,0.4725,0.3126,26.9048,23,33,0.8893,0.8737,0.6375
+"SVM (LinearSVC(C=0.04, dual=False, max_iter=100000, penalty='l1'))",Renal,"trains-p-diff(120,20)",20,0.481,0.4464,0.2953,27.4762,21,32,0.8909,0.8799,0.6556
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,1)",1,0.8686,0.8367,0.7325,26.1667,18,32,0.8625,0.8783,5.9551
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,2)",2,0.8495,0.805,0.6828,25.7667,19,31,0.8644,0.8667,5.8627
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,3)",3,0.8012,0.7662,0.628,24.7333,20,31,0.8653,0.8638,5.5028
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,4)",4,0.7774,0.7436,0.5986,24.7,19,29,0.8644,0.8623,6.2936
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,5)",5,0.7029,0.6722,0.5166,25.1,20,31,0.8658,0.8493,5.7943
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,6)",6,0.6794,0.6451,0.4809,24.6667,19,31,0.8678,0.8464,6.049
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,7)",7,0.6654,0.639,0.4749,24.0333,15,28,0.8681,0.8377,5.4047
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,8)",8,0.6555,0.6298,0.4648,25.6333,21,32,0.8694,0.8362,5.6891
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,9)",9,0.6185,0.5872,0.4216,24.7,18,30,0.8669,0.8435,5.6131
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,10)",10,0.603,0.5609,0.3943,24.9,18,32,0.8664,0.8464,5.5782
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,12)",12,0.5763,0.5409,0.3761,25.1333,20,31,0.8656,0.858,5.749
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,14)",14,0.5747,0.5343,0.37,24.2222,16,32,0.8648,0.8583,5.8008
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,16)",16,0.5402,0.5026,0.3373,25.25,19,30,0.8684,0.8514,5.6815
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,18)",18,0.4942,0.4677,0.3081,24.5238,18,29,0.8655,0.8696,5.937
+CPL (GenetClassifier(C=0.81)),Renal,"trains-p-diff(120,20)",20,0.4742,0.4454,0.2897,24.7619,20,30,0.8639,0.8696,5.8547

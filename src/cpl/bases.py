@@ -151,8 +151,9 @@ class Bases:
 
 
     def get_current_vertex(self):
-        """Determine, without iterative calculations, the coordinates of the current vertex
-           where the opimisation procedure is located
+        """
+        Determine, without iterative calculations, the coordinates of the current vertex
+        where the opimisation procedure is located
         """
         vertex = np.zeros(self.__dim)
         vertex[self.__actual_fv] = np.array([r[:self.__len_actual_fv] for r,bv in zip(self.B1, self.B_type) if bv]).sum(axis=0)

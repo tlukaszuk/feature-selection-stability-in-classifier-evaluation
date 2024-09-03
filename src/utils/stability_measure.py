@@ -17,7 +17,10 @@ class StabilityMeasure():
         if (k1==0) or (k2==0):
             return 0
         return  (r - k1*k2/n) / ( min(k1,k2) - max(0,k1+k2-n) )
-
+    
+    def _JaccardIndex(fs1, fs2, n): #range (0,1]
+        return len(fs1.intersection(fs2)) / len(fs1.union(fs2))
+        
     def _get_similarity_list(list_of_subsets, n, similarity_function):
         counts = {}
         results = []
@@ -75,3 +78,19 @@ class StabilityMeasure():
         if kbar == 0:
             return 0
         return 1. - Z.var(0, ddof=1).mean() / ((kbar/d)*(1.-kbar/d))
+    
+    def JaccardIndex(list_of_subsets, n):
+        """
+        Parameters
+        ----------
+        list_of_subsets : list[set]
+            Selected features sets
+        n : int
+            Initial number of features
+
+        Returns
+        -------
+        Jaccard index
+            range [0,1]
+        """
+        return StabilityMeasure._get_similarity_mean(list_of_subsets, n, StabilityMeasure._JaccardIndex)

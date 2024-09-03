@@ -3,13 +3,12 @@ import numpy as np
 from enum import Enum
 import math
 
-from sklearn.exceptions import NotFittedError
-from sklearn.utils.validation import check_array, check_X_y
+from sklearn.utils.validation import check_array, check_X_y, check_is_fitted
 
 from .featurespace import FeatureSpace
 from .datavectors import FeatureVectors, UnitVectors
 from .bases import Bases
-from .consts import INFINITY, ZERO, EPSILON, EQUAL_ZERO, EQUAL_EPSILON
+from .consts import INFINITY, ZERO, EQUALS_EPSILON
 
 
 class OptimizationMode(Enum):
@@ -31,15 +30,13 @@ class CPLBaseClassifier(ABC):
     Basics, common parts for different types of CPL classifiers
     """
 
-    def __init__(self, C="auto"):
-        self.hyperplane = None
-        self.feature_importances_ = None
+    def __init__(self, C="auto", use_theta=True):
         self.__verbose = 0
 
         # control parameters
         self._optimization_mode = OptimizationMode.OPT_HYP_MODE
-        self._block_feature_vectors_in_B = False
         self._C = C
+        self._use_theta = use_theta
 
 
     def __repr__(self) -> str:
@@ -68,16 +65,14 @@ class CPLBaseClassifier(ABC):
         """
         Return the separating hyperplane in a more readable form, with ordered coefficient values.
         """
-        if self.hyperplane is None:
-            raise NotFittedError(
-                "This classifier instance is not fitted yet. Call 'fit' with appropriate arguments before using it.")
+        check_is_fitted(self)
         hyp = sorted(
             [(f'x{f}', round(c, 4)) for f, c in zip(
-                self.hyperplane["features"], self.hyperplane["coefs"])],
+                self.hyperplane_["features"], self.hyperplane_["coefs"])],
             key=lambda x: abs(x[1]),
             reverse=True
         )
-        hyp += [('theta', round(self.hyperplane["theta"], 4))]
+        hyp += [('theta', round(self.hyperplane_["theta"], 4))]
         return hyp
 
 
@@ -100,7 +95,6 @@ class CPLBaseClassifier(ABC):
         -------
         self : object
         """
-
         X, y = check_X_y(X, y)
         classes_ = np.unique(y)
         if len(classes_) != 2:
@@ -131,9 +125,9 @@ class CPLBaseClassifier(ABC):
         y : ndarray of shape (n_samples,)
             The predicted classes.
         """
+        check_is_fitted(self)
         X = check_array(X)
-        predictions_bool = np.dot(X[:, self.hyperplane['features']], np.array(
-            self.hyperplane['coefs'])) - self.hyperplane['theta'] > 0
+        predictions_bool = np.dot(X[:, self.hyperplane_['features']], np.array(self.hyperplane_['coefs'])) - self.hyperplane_['theta'] > 0
         return np.array([self.classes_[int(pb)] for pb in predictions_bool])
 
 
@@ -152,9 +146,9 @@ class CPLBaseClassifier(ABC):
             The class probabilities of the input samples. The order of the
             classes corresponds to that in the attribute classes_.
         """
+        check_is_fitted(self)
         X = check_array(X)
-        predictions_float = np.dot(X[:, self.hyperplane['features']], np.array(
-            self.hyperplane['coefs'])) - self.hyperplane['theta']
+        predictions_float = np.dot(X[:, self.hyperplane_['features']], np.array(self.hyperplane_['coefs'])) - self.hyperplane_['theta']
         def sigmoid(x): return 1 / (1 + math.exp(-2*x))
         vfunc = np.vectorize(sigmoid)
         proba = np.zeros((X.shape[0], len(self.classes_)), dtype=np.float64)
@@ -176,35 +170,57 @@ class CPLBaseClassifier(ABC):
         """
         Set the parameters used in the prediction
         """
-        self.hyperplane = {
-            "features": [f for f in self.fs.features if (self.uvs.in_base[f] == False) and (f != self.dim-1)],
-            "coefs": [self.vertex[f] for f in self.fs.features if (self.uvs.in_base[f] == False) and (f != self.dim-1)],
-            "theta": self.vertex[self.dim-1] if (self.dim-1 in self.fs.features) and (self.uvs.in_base[self.dim-1] == False) else 0.
+        self.hyperplane_ = {
+            "features": [f for f in self.fs.features if (self.uvs.in_base[f] == False) and (not self._use_theta or f != self.dim)],
+            "coefs": [self.vertex[f] for f in self.fs.features if (self.uvs.in_base[f] == False) and (not self._use_theta or f != self.dim)],
+            "theta": self.vertex[self.dim] if self._use_theta and (self.dim in self.fs.features) and (self.uvs.in_base[self.dim] == False) else 0.
         }
-        self.feature_importances_ = np.zeros(self.dim-1)
-        for f, c in zip(self.hyperplane["features"], self.hyperplane["coefs"]):
-            self.feature_importances_[f] = abs(c)
+
+
+    @property
+    def feature_importances_(self):
+        """
+        Return the feature importances.
+        The importance of a feature is computed as the (normalized) weight in decision rule brought by that feature.
+
+        Returns
+        -------
+        feature_importances_ : ndarray of shape (n_features,)
+            Normalized weights in classifier decision rule.
+        """
+        check_is_fitted(self)
+        importances = np.zeros(self.dim)
+        importances[self.hyperplane_["features"]] = np.abs(self.hyperplane_["coefs"])
+        normalizer = np.sum(importances)
+        if normalizer > 0.0:
+            importances = importances / normalizer
+        return importances
 
 
     def __init_procedure(self, X, y, sample_weight=None):
         self.num, self.dim = X.shape
-        self.dim += 1
 
-        # determine feature weights
+        self.step = 0
+
+        # feature weights
         feature_weight = np.abs(X).max(axis=0)
-        feature_weight = np.append(feature_weight, [0.0])
-        self.fs = FeatureSpace(self.dim, feature_weight)
+        n_features = self.dim
+        if self._use_theta:
+            n_features += 1
+            feature_weight = np.append(feature_weight, [0.0])
+        self.fs = FeatureSpace(n_features, feature_weight)
 
-        self.fvs = FeatureVectors(X, y, sample_weight)
-        self.uvs = UnitVectors(self.dim)
-        self.bases = Bases(self.num, self.dim, self.fvs, self.uvs, self.fs)
-        self.vertex = np.zeros(self.dim)
-        self.cv = np.zeros(self.dim)
-        self.products_B1_cv = np.zeros(self.dim)
+        # real and unit vectors
+        self.fvs = FeatureVectors(X, y, sample_weight, self._use_theta)
+        self.uvs = UnitVectors(n_features)
+        self.bases = Bases(self.num, n_features, self.fvs, self.uvs, self.fs)
+        self.vertex = np.zeros(n_features)
+        self.cv = np.zeros(n_features)
+        self.products_B1_cv = np.zeros(n_features)
         if self._C == "auto":
             self.p_lambda = 0.0005 / self.num
         else:
-            self.p_lambda = 1. - self._C
+            self.p_lambda = 0.1 - self._C/10
 
         self.seq = []
         self.epsilon_neighbourhood = set()
@@ -262,22 +278,20 @@ class CPLBaseClassifier(ABC):
 
         # moving along the exit edge until the vertex where s <= 0
         for i, v in enumerate(self.seq):
+            self.kv = (*v, i)
             if v[0]:
                 self.s -= self._get_cv_projection_correction_by_fv(v[1])
                 if self.fvs.products_fv_B1l[v[1]] > 0:
                     self._modify_cv_plus(v[1])
                 elif (self.s > 0) and (i+1 < len(self.seq)):
                     self._modify_cv_minus(v[1])
+                if self.s <= 0:
+                    break
             else:
                 self.s -= self._get_cv_projection_correction_by_uv(v[1])
                 if self.s <= 0:
                     break
                 self._modify_cv_unit(v[1])
-            if self.s <= 0:
-                break
-
-        # vector entering the base
-        self.kv = self.seq[i][0], self.seq[i][1], self.seq[i][2], i
 
         return self.s <= 0
 
@@ -322,12 +336,10 @@ class CPLBaseClassifier(ABC):
         self._update_products_B1_cv()
 
         cv_projections = self.products_B1_cv[self.fs.features]
-        if self._block_feature_vectors_in_B and (self._optimization_mode == OptimizationMode.OPT_HYP_MODE):
-            cv_projections[self.bases.B_type[self.fs.features]] = -INFINITY
-        else:
-            fv_selection = self.bases.B_type[self.fs.features] & (cv_projections < 0)
-            cv_projections[fv_selection] *= -1 
-            cv_projections[fv_selection] -= self.fvs.sample_weight[self.bases.B_index[self.fs.features[fv_selection]]]
+        fv_selection = self.bases.B_type[self.fs.features] & (cv_projections < 0)
+        cv_projections[fv_selection] *= -1 
+        cv_projections[fv_selection] -= self.fvs.sample_weight[self.bases.B_index[self.fs.features[fv_selection]]]
+
         ev_selection = (self.bases.B_type[self.fs.features] == False) & (cv_projections < 0)
         cv_projections[ev_selection] *= -1
         if self._optimization_mode == OptimizationMode.OPT_HYP_MODE:
@@ -382,16 +394,16 @@ class CPLBaseClassifier(ABC):
         kv_seq_id = self.kv[3]
         self.epsilon_neighbourhood = set()
 
-        if (kv_seq_id > 0) and EQUAL_EPSILON(self.kv[2] - self.seq[kv_seq_id-1][2]):
+        if (kv_seq_id > 0) and EQUALS_EPSILON(self.kv[2], self.seq[kv_seq_id-1][2]):
             i = kv_seq_id-1
-            while (i >= 0) and EQUAL_EPSILON(self.kv[2] - self.seq[i][2]):
+            while (i >= 0) and EQUALS_EPSILON(self.kv[2], self.seq[i][2]):
                 self.epsilon_neighbourhood.add(self.seq[i][:2])
                 i -= 1
 
-        if (kv_seq_id < len(self.seq)-1) and (EQUAL_EPSILON(self.kv[2] - self.seq[kv_seq_id+1][2])):
+        if (kv_seq_id < len(self.seq)-1) and (EQUALS_EPSILON(self.kv[2], self.seq[kv_seq_id+1][2])):
             new_kv = self.seq[kv_seq_id]
             i = kv_seq_id+1
-            while (i < len(self.seq)) and EQUAL_EPSILON(self.kv[2] - self.seq[i][2]):
+            while (i < len(self.seq)) and EQUALS_EPSILON(self.kv[2], self.seq[i][2]):
                 self.epsilon_neighbourhood.add(new_kv[:2])
                 if new_kv[0]:
                     if self.fvs.products_fv_B1l[new_kv[1]] <= 0:
@@ -510,8 +522,8 @@ class CPLBaseClassifier(ABC):
 
 
     def _func_crit(self, vertex):
-        cr1 = sum([sw*(1.-np.dot(fv[self.fs.features], vertex[self.fs.features]))
-                   for fv, ps, sw in zip(self.fvs.vectors, self.fvs.on_positive_side, self.fvs.sample_weight) if ps])
+        pyvs = np.dot(self.fvs.vectors[:,self.fs.features], vertex[self.fs.features])
+        cr1 = sum([sw * (1. - pyv) for pyv, sw in zip(pyvs, self.fvs.sample_weight) if (pyv+1e-10 < 1)])
         cr2 = self.p_lambda * sum([abs(vertex[f])*self.fs.feature_weight[f]
                                   for f in self.fs.features if self.uvs.in_base[f] == False])
         return cr1, cr2, cr1 + cr2
@@ -531,35 +543,41 @@ class CPLBaseClassifier(ABC):
 
 
     def _diagnose(self):
+        self.step += 1
+        print("step: ", self.step)
         vertex = self.bases.get_current_vertex()
-        important_features = [f for f in self.fs.features if not self.uvs.in_base[f]]
-        print("--------------")
+        # important_features = [f for f in self.fs.features if not self.uvs.in_base[f]]
+        #print("--------------")
         print("Fc = ", self._func_crit(vertex))
         print("Margin = ", self._margin_width(vertex))
-        print("procedure state = ", self.procedure_state)
+        # print("procedure state = ", self.procedure_state)
         # if self.procedure_state == ProcedureState.DEGENERATION_STATE:
         #     print()
         #     print(self.epsilon_neighbourhood)
-        print()
-        print("l={}, lv={}, kv={}".format(self.l, self.lv, self.kv))
+        # print()
+        # print("l={}, lv={}, kv={}".format(self.l, self.lv, self.kv))
         # print()
         # print("seq: ", self.seq)
-        print()
-        self.bases.diagnose()
-        print()
-        print("cv(proc): ", self.cv[self.fs.features])
-        print("cv(spr_): ", self._correction_vector())
+        # print()
+        # self.bases.diagnose()
+        # print()
+        # print("cv(proc): ", self.cv[self.fs.features])
+        # print("cv(spr_): ", self._correction_vector())
+        # for cv_p, cv_s in zip(self.cv[self.fs.features],self._correction_vector()):
+        #     if not EQUALS_EPSILON(cv_p, cv_s):
+        #         print("--->", cv_p, cv_s) 
         # print()
         # print("B1 x cv: ", self.products_B1_cv[self.fs.features])
-        print()
-        print("vertex: ", [(f,v) for f,v in zip(self.fs.features, vertex[self.fs.features]) if f in important_features])
+        # print()
+        # print("vertex(spr_): ", [(f,v) for f,v in zip(self.fs.features, vertex[self.fs.features]) if f in important_features])
+        # print("vertex(proc): ", [(f,v) for f,v in zip(self.fs.features, self.vertex[self.fs.features]) if f in important_features])
         # print("feature weight: ", self.fs.feature_weight[self.fs.features])
         # print()
         # print("# proc_ps man_ps man_pyv error")
         # for i,(fv,ps) in enumerate(zip(self.fvs.vectors, self.fvs.on_positive_side)):
         #     pyv = np.dot(fv[self.fs.features],vertex[self.fs.features])
         #     print(i, ps, pyv+1e-10 < 1, pyv, "<---" if ps != (pyv+1e-10 < 1) else "")
-        print("--------------")
+        # print("--------------")
 
 
 
@@ -574,9 +592,9 @@ class SekwemClassifier(CPLBaseClassifier):
         self.bases.init_full()
 
         # correction_vector
+        self.cv = (self.fvs.vectors * np.array([self.fvs.sample_weight]).T).sum(axis=0)
         if self._optimization_mode == OptimizationMode.OPT_HYP_MODE:
-            self.cv = -self.p_lambda * self.uvs.ev * self.fs.feature_weight
-        self.cv += (self.fvs.vectors * np.array([self.fvs.sample_weight]).T).sum(axis=0)
+            self.cv += -self.p_lambda * self.uvs.ev * self.fs.feature_weight
 
         # <B1,correction_vector> products
         self.products_B1_cv = np.copy(self.cv)
@@ -600,9 +618,10 @@ class GenetClassifier(CPLBaseClassifier):
         self.bases.init_empty()
 
         # correction_vector
+        self.cv = (self.fvs.vectors * np.array([self.fvs.sample_weight]).T).sum(axis=0)
         if self._optimization_mode == OptimizationMode.OPT_HYP_MODE:
-            self.cv = -self.p_lambda * self.uvs.ev * self.fs.feature_weight
-        self.cv += (self.fvs.vectors * np.array([self.fvs.sample_weight]).T).sum(axis=0)
+            self.cv += -self.p_lambda * self.uvs.ev * self.fs.feature_weight
+        
 
         # determination of the first feature
         m = abs(self.cv).argmax()
@@ -655,8 +674,8 @@ class GenetClassifier(CPLBaseClassifier):
         if self._optimization_mode == OptimizationMode.OPT_HYP_MODE:
             wc -= self.p_lambda * self.uvs.ev[fos] * self.fs.feature_weight[fos]
         
-        correvtion_mask = (wc < 0)
-        wc[correvtion_mask] = -wc[correvtion_mask] - 2 * self.p_lambda * self.fs.feature_weight[fos[correvtion_mask]]
+        correction_mask = (wc < 0)
+        wc[correction_mask] = -wc[correction_mask] - 2 * self.p_lambda * self.fs.feature_weight[fos[correction_mask]]
 
         if (len(wc) == 0) or (np.max(wc) < ZERO):
             return None

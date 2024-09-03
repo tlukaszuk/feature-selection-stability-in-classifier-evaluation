@@ -3,7 +3,7 @@ ZERO = 0.00000001
 EPSILON = 0.0000000001
 
 def EQUAL_ZERO(value):
-    return (value < ZERO) & (value > -ZERO)
+    return abs(value) < ZERO
 
-def EQUAL_EPSILON(value):
-    return (value < EPSILON) & (value > -EPSILON)
+def EQUALS_EPSILON(value1, value2):
+    return abs(value1 - value2) < EPSILON

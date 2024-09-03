@@ -5,11 +5,23 @@ from .consts import INFINITY, ZERO, EPSILON, EQUAL_ZERO
 
 
 class FeatureVectors:
-    """A class aggregating all real feature vectors and their state information
+    """
+    A class aggregating all real feature vectors and their state information
     during the execution of the optimization procedure.
+
+    Parameters
+    ----------
+    X : array-like of shape (n_samples, n_features)
+        The input samples.
+    y : array-like of shape (n_samples,)
+        The target values, class labels, in bool type.
+    sample_weight : array-like of shape (n_samples,), default=None
+        Sample weights. If None, then samples are equally weighted.
+    use_theta : bool, default=True
+        Whether to work with extended feature vectors adapted to handle the theta threshold.
     """
     
-    def __init__(self, X, y, sample_weight=None): 
+    def __init__(self, X, y, sample_weight=None, use_theta=True): 
         # weights of vectors
         if sample_weight is not None:
             self.sample_weight = np.array(sample_weight)
@@ -19,8 +31,11 @@ class FeatureVectors:
             self.sample_weight = np.array([weight_Cp if label else weight_Cm for label in y])
             
         # augmented vectors
-        def aug_x(x,label):
-            ax = np.append(x, [-1.])
+        def aug_x(x, label):
+            if use_theta:
+                ax = np.append(x, [-1.])
+            else:
+                ax = np.array(x)
             if not label:
                 ax *= -1.
             return ax
@@ -56,13 +71,15 @@ class FeatureVectors:
         idxs_tbc = [i for i,p in zip(idxs_tbc, self.products_fv_B1l[idxs_tbc]) if not EQUAL_ZERO(p)]
         if hold_direction == False:
             self.products_fv_B1l[idxs_tbc] = -self.products_fv_B1l[idxs_tbc]
+        idxs_tbc = [i for i,pos,p in zip(idxs_tbc, self.on_positive_side[idxs_tbc], self.products_fv_B1l[idxs_tbc])
+                    if not (pos ^ (p>0))]
         if not spread_edges:
-            idxs_tbc = [i for i,pos,p in zip(idxs_tbc, self.on_positive_side[idxs_tbc], self.products_fv_B1l[idxs_tbc])
-                        if not (pos ^ (p>0))]
+            # idxs_tbc = [i for i,pos,p in zip(idxs_tbc, self.on_positive_side[idxs_tbc], self.products_fv_B1l[idxs_tbc])
+            #             if not (pos ^ (p>0))]
             distances = [(1. - pfvv) / p for pfvv,p in zip(self.products_fv_vertex[idxs_tbc], self.products_fv_B1l[idxs_tbc])]
         else:
-            idxs_tbc = [i for i,pfvv,p in zip(idxs_tbc, self.products_fv_vertex[idxs_tbc], self.products_fv_B1l[idxs_tbc])
-                        if not ((2. + i - pfvv > 0) ^ (p>0))]
+            # idxs_tbc = [i for i,pfvv,p in zip(idxs_tbc, self.products_fv_vertex[idxs_tbc], self.products_fv_B1l[idxs_tbc])
+            #             if not ((2. + i - pfvv > 0) ^ (p>0))]
             distances = [(2. + i - pfvv) / p for i,pfvv,p in zip(idxs_tbc, self.products_fv_vertex[idxs_tbc], self.products_fv_B1l[idxs_tbc])]
         return [(True, i, dist) for i,dist in zip(idxs_tbc, distances)]
     
@@ -81,7 +98,8 @@ class FeatureVectors:
 
     def recalculate_products_fv_vertex(self, vertex, fs):
         self.products_fv_vertex[self.in_base] = 1.0
-        self.products_fv_vertex[~self.in_base] = [np.dot(fv[fs.features], vertex[fs.features]) for fv in self.vectors[~self.in_base]]
+        #self.products_fv_vertex[~self.in_base] = [np.dot(fv[fs.features], vertex[fs.features]) for fv in self.vectors[~self.in_base]]
+        self.products_fv_vertex[~self.in_base] = np.dot(self.vectors[~self.in_base][:,fs.features], vertex[fs.features])
 
     
         

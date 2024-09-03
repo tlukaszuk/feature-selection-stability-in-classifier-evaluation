@@ -1,0 +1,61 @@
+classifier,dataset,cv-procedure,p,Lustgarten,Nogueira,Jaccard,#features_mean,#features_min,#features_max,acc_train,acc_test,execution_time
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,1)",1,0.6164,0.5732,0.4255,20.8667,16,25,1.0,0.9857,0.5166
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,2)",2,0.6155,0.5483,0.3908,19.6,11,25,1.0,0.9889,0.5269
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,3)",3,0.5647,0.5167,0.3604,20.1333,14,27,1.0,0.9905,0.5292
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,4)",4,0.5212,0.475,0.3219,20.5667,14,26,1.0,0.9937,0.5298
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,5)",5,0.5227,0.4797,0.3256,21.6667,17,27,1.0,0.9889,0.5196
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,6)",6,0.4753,0.4336,0.2816,21.2333,15,26,1.0,0.9905,0.5271
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,7)",7,0.4807,0.44,0.2865,21.3,15,29,1.0,0.9873,0.5102
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,8)",8,0.4654,0.4249,0.2766,19.8333,13,26,1.0,0.9952,0.519
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,9)",9,0.4267,0.3923,0.2465,20.8519,12,26,1.0,0.9965,0.5203
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,10)",10,0.4053,0.3764,0.2357,19.6296,13,24,1.0,0.9965,0.5181
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,12)",12,0.4262,0.3799,0.2405,19.1905,15,26,1.0,0.9955,0.5231
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,14)",14,0.39,0.3533,0.2179,19.5556,14,25,1.0,0.9947,0.5193
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,16)",16,0.3951,0.3634,0.2262,20.6667,16,27,1.0,0.9868,0.5225
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,18)",18,0.3752,0.3451,0.2093,21.2,16,26,1.0,0.9905,0.5221
+"RF (RandomForestClassifier(min_samples_leaf=2, random_state=0))",Leukemia,"trains-p-diff(80,20)",20,0.3806,0.3476,0.2127,19.8667,14,24,1.0,0.9937,0.5191
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,1)",1,0.928,0.8287,0.7194,17.3333,12,24,0.9958,0.9698,0.4884
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,2)",2,0.9202,0.8178,0.699,20.3333,12,26,0.9958,0.9762,0.4968
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,3)",3,0.9391,0.832,0.7164,18.2,10,24,0.9988,0.9683,0.485
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,4)",4,0.9424,0.8062,0.6854,18.5333,12,27,0.9988,0.9683,0.4914
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,5)",5,0.9157,0.8318,0.7151,18.2667,11,24,0.9971,0.9667,0.4916
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,6)",6,0.9317,0.8279,0.7113,20.0,11,30,0.9983,0.981,0.4955
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,7)",7,0.8802,0.8006,0.6695,22.8333,16,29,0.9979,0.981,0.4763
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,8)",8,0.9158,0.8113,0.6834,20.5333,11,27,0.9988,0.9857,0.48
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,9)",9,0.9021,0.7999,0.6695,20.7778,12,26,0.9986,0.9965,0.4752
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,10)",10,0.8991,0.807,0.6796,19.8519,13,25,0.9986,0.9965,0.5003
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,12)",12,0.9189,0.7832,0.6457,21.1905,14,28,0.9976,0.9932,0.4775
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,14)",14,0.8941,0.7767,0.6386,18.8889,13,27,0.9993,0.9947,0.4879
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,16)",16,0.8728,0.7637,0.6253,20.3889,13,27,0.9979,0.9974,0.4764
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,18)",18,0.8479,0.7776,0.6405,21.1333,15,28,0.9992,0.9937,0.4761
+"LR (LogisticRegression(C=0.043, max_iter=100000, penalty='l1', solver='liblinear'))",Leukemia,"trains-p-diff(80,20)",20,0.9015,0.751,0.6106,20.0667,13,29,1.0,0.9905,0.4777
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,1)",1,0.9648,0.9413,0.8951,19.3,16,21,1.0,1.0,0.5478
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,2)",2,0.9606,0.9306,0.874,19.4333,17,22,1.0,1.0,0.5387
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,3)",3,0.9289,0.8992,0.8211,20.1,16,23,1.0,0.9984,0.5598
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,4)",4,0.9107,0.8795,0.7929,19.2,17,23,1.0,1.0,0.5969
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,5)",5,0.8779,0.8353,0.7298,19.9333,17,24,1.0,0.9984,0.5701
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,6)",6,0.8695,0.838,0.7313,20.4,16,23,1.0,1.0,0.6615
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,7)",7,0.8572,0.8278,0.7153,20.1333,16,24,1.0,1.0,0.5957
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,8)",8,0.8614,0.837,0.7293,20.8,17,24,1.0,1.0,0.5916
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,9)",9,0.8063,0.7694,0.6338,21.6296,17,25,1.0,1.0,0.5509
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,10)",10,0.8363,0.7845,0.6525,21.3333,16,26,1.0,0.9982,0.5676
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,12)",12,0.7846,0.735,0.5845,21.0476,16,27,1.0,1.0,0.5698
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,14)",14,0.8096,0.7901,0.6601,21.0,19,24,1.0,1.0,0.6095
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,16)",16,0.8077,0.7595,0.6155,21.5,17,25,1.0,1.0,0.6328
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,18)",18,0.7486,0.7109,0.556,21.2,18,25,1.0,1.0,0.581
+"SVM (LinearSVC(C=0.14, dual=False, max_iter=100000, penalty='l1'))",Leukemia,"trains-p-diff(80,20)",20,0.771,0.701,0.5416,21.0667,15,25,1.0,1.0,0.6101
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,1)",1,0.9043,0.889,0.8207,19.7,16,21,1.0,1.0,2.572
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,2)",2,0.8912,0.8643,0.7724,19.3667,15,22,1.0,1.0,2.2823
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,3)",3,0.7812,0.7538,0.6236,19.5,15,24,1.0,0.9984,2.3831
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,4)",4,0.8262,0.8025,0.6878,19.9,17,23,1.0,1.0,2.3472
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,5)",5,0.713,0.6771,0.5242,19.2333,13,23,1.0,0.9968,2.2224
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,6)",6,0.7112,0.6713,0.5177,18.5,15,23,1.0,0.9952,2.3162
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,7)",7,0.686,0.6568,0.5,18.2667,14,21,1.0,0.9984,2.4674
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,8)",8,0.6763,0.647,0.4891,18.7,16,22,1.0,0.9968,2.2557
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,9)",9,0.6435,0.6154,0.4534,18.2222,15,21,1.0,0.9982,2.4166
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,10)",10,0.653,0.6195,0.4642,18.5185,14,24,1.0,0.9982,2.5273
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,12)",12,0.5997,0.5711,0.4119,19.1429,16,22,1.0,0.9955,2.6379
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,14)",14,0.6205,0.5809,0.4183,18.3889,14,22,1.0,0.9974,2.3783
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,16)",16,0.5808,0.5569,0.3941,18.5556,16,21,1.0,0.9974,2.466
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,18)",18,0.5585,0.5251,0.3682,17.9333,15,20,1.0,0.9937,2.6371
+CPL (GenetClassifier(C=0.95)),Leukemia,"trains-p-diff(80,20)",20,0.5519,0.5228,0.3598,19.8,17,23,1.0,1.0,2.46
